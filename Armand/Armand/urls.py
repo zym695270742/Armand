@@ -20,4 +20,8 @@ from Armand_api.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('help/', v_help),
+    path('login_purple/', v_login_purple),
+    path('login/', login),
+    path('login_action/', login_action),
+    path('register_action/', register_action),
 ]

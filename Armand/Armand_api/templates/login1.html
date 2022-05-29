@@ -1,0 +1,353 @@
+{% load static %}
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Help_page</title>
+
+    <style>
+        #csdn-toolbar .toolbar-logo, #csdn_tool_otherPlace .toolbar-logo {
+    max-width: 80px;
+    height: 100%;
+    margin-right: 8px;
+    position: relative;
+}
+
+
+        .loginform{
+        padding:10px;
+        border:1px solid pink;
+        border-radius:10px;
+        float:left;
+        margin-top:20px;
+        }
+        .formheading{
+        background-color:red;
+        color:white;
+        padding:4px;
+        text-align:center;
+        }
+        .sub{
+        background-color:blue;
+        padding: 7px 40px 7px 40px;
+        color:white;
+        font-weight:bold;
+        margin-left:70px;
+        border-radius:5px;
+        }
+
+
+        .login-left {
+            display: inline-block;
+            height: 584px;
+            width: 494px;
+            position: relative;
+            left: 30%;
+            margin-left: -432px;
+            vertical-align: top;
+            background-size: 92%;
+            top: -40px;
+            overflow: visible;
+        }
+
+        .login-left-box {
+            height: 422px;
+            width: 195px;
+            margin: 48px 0 0 173px;
+            background-size: 100%;
+        }
+        .login-left .app-download {
+            margin-top: 72px;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+        }
+                .login-left .app-download .lnk-app {
+            height: 37px;
+            width: 131px;
+            display: inline-block;
+            margin-right: 2px;
+            vertical-align: top;
+            font-size: 0;
+            background: #dd6be1 left center no-repeat;
+            background-size: 131px;
+        }
+        .login-right {
+            display: inline-block;
+            border: 1px solid #D8D8D8;
+            height: 630px;
+            width: 374px;
+            position: relative;
+            left: 63%;
+            margin-top: 25px;
+            margin-left: -46px;
+            vertical-align: top;
+        }
+        .account-body-tabs ul li {
+            display: inline-block;
+            width: 50%;
+            font-size: 18px;
+            line-height: 2;
+            text-align: center;
+            cursor: pointer;
+        }
+        .account-body {
+            min-height: 450px;
+            width: 340px;
+            padding: 50px 30px 100px;
+            overflow: hidden;
+            position: relative;
+            background: #fff;
+        }
+        .account-body-tabs {
+            margin-bottom: 10px;
+            color: #9B9B9B;
+            font-size: 0;
+        }
+        .login-start .tab-quick, .login-start .start, .login-start .account-tabcon-quick {
+            display: none;
+        }
+        .account-body-tabs .account-tab-switch {
+            width: 100%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            overflow: visible;
+        }
+        .account-body-tabs .account-tab-switch-icon .icon-switch {
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-size: 40px;
+            overflow: visible;
+        }
+        .account-form-codes .account-form-field-code {
+            position: absolute;
+            padding: 0 10px;
+            right: 0;
+            top: 0;
+            line-height: 42px;
+        }
+        .login-start .tab-quick, .login-start .start, .login-start .account-tabcon-quick {
+            display: none;
+        }
+        .account-form-field-area-code {
+            width: 50px;
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            overflow: hidden;
+        }
+        .account-form-field-area-code-label {
+            width: 100%;
+            margin: 0;
+            padding-right: 1px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 35px;
+            background: none;
+            cursor: pointer;
+        }
+
+        .account-form-tips {
+            color: #9B9B9B;
+        }
+        .account-form-error {
+            min-height: 20px;
+            position: initial;
+            margin-bottom: 5px;
+            background: none;
+        }
+
+        .account-form-raw {
+            margin-bottom: 10px;
+        }
+        .account-form-label {
+            display: none;
+        }
+
+        .account-form-codes {
+            color: #fff;
+            line-height: 40px;
+            position: relative;
+        }
+        .account-form-field {
+            display: block;
+            width: 100%;
+            position: relative;
+        }
+        .account-form .btn {
+            display: block;
+        }
+        .account-form-field-submit .btn {
+            display: block;
+            padding: 0;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .account-form-field-submit {
+            margin: 0;
+            padding: 0;
+        }
+        .account-form-field-submit {
+            position: relative;
+            width: 280px;
+            background-color: #6752a8;
+            margin-left: 60px;
+            padding-top: 20px;
+        }
+        .account-form-label {
+            float: left;
+            display: block;
+            line-height: 40px;
+            height: 40px;
+            width: 60px;
+            font-size: 13px;
+        }
+                .account-body-tabs .account-tab-switch {
+            width: 100%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            overflow: visible;
+        }
+        .account-body-tabs ul li.account-tab-scan {
+            color: #333;
+            font-weight: 600;
+            text-align: left;
+        }
+        .account-form-field-submit {
+            margin: 0;
+            padding: 0;
+        }
+        .account-form-field input {
+            box-shadow: none;
+        }
+        input[type="text"], input[type="number"], input[type="phone"], input[type="password"], textarea {
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: rgba(255,0,0,0);
+            background: transparent;
+        }
+        .account-form .btn {
+            display: block;
+        }
+        .account-form-field-submit .btn {
+            display: block;
+            padding: 0;
+            font-weight: 600;
+            font-size: 15px;
+
+        }
+        .account-form-error {
+            min-height: 20px;
+            position: initial;
+            margin-bottom: 5px;
+            background: none;
+        }
+        .account-form-raw {
+            margin-bottom: 10px;
+        }
+        .account-form-field {
+            display: block;
+            width: 100%;
+            position: relative;
+        }
+        .account-form-raw {
+            margin-bottom: 10px;
+        }
+        .account-form-label {
+            display: none;
+        }
+    </style>
+
+
+</head>
+<body>
+<div id="csdn-toolbar" style="position: relative;top:0px;left:0px;width:100%"></div>
+    <div class="toolbar-inside"></div>
+<div style="margin:0 auto; padding: 25px;">
+    <div class="toolbar-left"></div>
+        <div class="toolbar-logo csdn-toolbar-f1"></div>
+            <a href="https://www.baidu.com">
+                <img src="">
+            </a>
+    <div class="toolbar-midddle"></div>
+    <div class="toolbar-right"></div>
+
+
+    <div style="width: 1800px;height: 800px;border: 1px solid red;margin:auto;">
+        <div class="login-left" >
+                <div class="login-left-box" >
+                     <img src="{% static 'images/001_two_girls.jpg'%}" class="lnk-app">
+                </div>
+        </div>
+
+        <div class="login-right" >
+            <div class="account-body login-wrap login-start  ">
+              <div class="account-body-tabs">
+                <ul class="tab-start">
+                  <li class="account-tab-phone on">短信登录／注册</li>
+                  <li class="account-tab-account">密码登录</li>
+                </ul>
+                <ul class="tab-quick">
+                  <li class="account-tab-scan">二维码登录</li>
+                </ul>
+                <div class="account-tab-switch">
+                  <div class="account-tab-switch-icon">
+                    <a class="quick icon-switch "></a>
+                    <a class="start icon-switch "></a>
+                  </div>
+                  <div class="account-tab-switch-text">
+                    <span class="quick">扫码登录</span>
+                    <span class="start">短信登录／注册</span>
+                  </div>
+                </div>
+              </div>
+              <div class="account-tabcon-start">
+                <div class="account-form">
+                <div class="account-form-tips">Welcome to Armand ApiTest Platform! <a target="_blank" href="https://accounts.douban.com/passport/agreement"></a></div>
+              <div class="account-form-error"><span class="hide"></span></div>
+
+              <div class="account-form-raw">
+                <label class="account-form-label">手机号：</label>
+                <div class="account-form-field account-form-field-phone ">
+                  <span class="icon clear-input hide"></span>
+                  <input type="phone" name="phone" maxlength="13" class="account-form-input" placeholder="手机号" tabindex="1">
+                    <div class="account-form-field-area-code">
+                      <div class="account-form-field-area-code-label js-choose-district">+86</div>
+                    </div>
+                </div>
+              </div>
+
+
+              <div class="account-form-raw">
+                <label class="account-form-label">验证码：</label>
+                <div class="account-form-field account-form-codes">
+                  <input id="code" type="text" name="code" maxlength="6" class="account-form-input" placeholder="验证码" tabindex="2" autocomplete="off">
+                  <div class="account-form-field-code ">
+                    <a href="javascript:;">获取验证码</a>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="account-form-field-submit ">
+                <a href="javascript:;" class="btn btn-phone " style="color: white" align="center">登录</a>
+              </div>
+        </div>
+
+
+              </div>
+            </div>
+        </div>
+    </div>
+ </div>
+</body>
+</html>

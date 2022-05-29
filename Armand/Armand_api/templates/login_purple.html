@@ -1,0 +1,348 @@
+{% load static %}
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Help_page</title>
+
+    <style>
+        #csdn-toolbar .toolbar-logo, #csdn_tool_otherPlace .toolbar-logo {
+            max-width: 80px;
+            height: 100%;
+            margin-right: 8px;
+            position: relative;
+        }
+
+
+        .login-left {
+            display: inline-block;
+            height: 584px;
+            width: 494px;
+            position: relative;
+            left: 35%;
+            margin-left: -432px;
+            vertical-align: top;
+            background-size: 92%;
+            top: 20px;
+            overflow: visible;
+
+        }
+
+        .login-left-box {
+            height: 422px;
+            width: 195px;
+            margin: 48px 0 0 173px;
+            background-size: 100%;
+        }
+        .login-left .app-download {
+            margin-top: 72px;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+
+        }
+                .login-left .app-download .lnk-app {
+            height: 37px;
+            width: 131px;
+            display: inline-block;
+            margin-right: 2px;
+            vertical-align: top;
+            font-size: 0;
+            background: #dd6be1 left center no-repeat;
+            background-size: 131px;
+        }
+        .login-right {
+            display: inline-block;
+            border: 0px solid #D8D8D8;
+            height: 660px;
+            width: 390px;
+            position: relative;
+            left: 58%;
+            margin-top: 20px;
+            margin-left: -100px;
+            vertical-align: top;
+
+        }
+        .account-body-tabs ul li {
+            display: inline-block;
+            width: 50%;
+            font-size: 23px;
+            line-height: 1;
+            text-align: center;
+            cursor: pointer;
+        }
+        .account-body {
+            min-height: 503px;
+            width: 390px;
+            padding: 50px 30px 100px;
+            overflow: hidden;
+            position: relative;
+            background: #fff;
+            background-color: #f5f1f2;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .account-body-tabs {
+            margin-bottom: 10px;
+            color: #6a54ad;
+            font-size: 21px;
+            overflow: hidden;
+        }
+        .account-body-tabs .account-tab-switch {
+            width: 100%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            overflow: visible;
+        }
+        .account-body-tabs .account-tab-switch-icon .icon-switch {
+            height: 40px;
+            width: 40px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-size: 40px;
+            overflow: visible;
+        }
+        .account-form-codes .account-form-field-code {
+            position: absolute;
+            padding: 0 10px;
+            right: 0;
+            top: 0;
+            line-height: 42px;
+        }
+
+
+        .account-form-raw {
+            margin-bottom: 10px;
+        }
+        .account-form-label {
+            display: none;
+        }
+
+        .account-form-codes {
+            color: #fff;
+            line-height: 40px;
+            position: relative;
+        }
+        .account-form-field {
+            display: block;
+            width: 100%;
+            position: relative;
+        }
+        .account-form .btn {
+            display: block;
+        }
+
+        .account-form-field-submit {
+            position: relative;
+            width: 100%;
+            background-color: #6752a8;
+            margin-left: 60px;
+            padding-top: 20px;
+            margin: 0;
+            padding: 2px;
+            border-radius: 10px;
+        }
+        .account-form-label {
+            float: left;
+            display: block;
+            line-height: 40px;
+            height: 40px;
+            width: 60px;
+            font-size: 15px;
+        }
+                .account-body-tabs .account-tab-switch {
+            width: 100%;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            overflow: visible;
+        }
+        .account-body-tabs ul li.account-tab-scan {
+            color: #333;
+            font-weight: 600;
+            text-align: left;
+        }
+        .account-form-field-submit {
+            margin: 0;
+            padding: 0;
+        }
+        .account-form-field input {
+            box-shadow: none;
+        }
+        input[type="text"], input[type="number"], input[type="phone"], input[type="password"], textarea {
+            -webkit-appearance: none;
+            -webkit-tap-highlight-color: rgba(255,0,0,0);
+            background: transparent;
+        }
+        .account-form .btn {
+            display: block;
+        }
+        .account-form-field-submit .btn {
+            display: block;
+            padding: 0;
+            border-radius: 10px ;
+            font-weight: 600;
+            font-size: 17px;
+            height: 27px;
+            display: flex;justify-content: center;
+        }
+        .account-form-raw {
+            margin-bottom: 10px;
+        }
+        .account-form-field {
+            display: block;
+            width: 100%;
+            position: relative;
+        }
+        .account-form-raw {
+            margin-bottom: 10px;
+        }
+        .account-form-label {
+            display: none;
+        }
+
+        .account-form-input {
+            width: 100%;
+            font-size: 13px;
+            padding: 10px;
+            border-radius: 103px;
+            box-sizing: border-box;
+            border: 2px solid #E4E6E5;
+        }
+
+
+        .session-authentication .auth-form-header {
+            margin-bottom: 16px;
+            color: blue;
+            text-align: center;
+            text-shadow: none;
+            background-color: transparent;
+            border: 0;
+        }
+        .p-0 {
+            padding: 0 !important;
+        }
+        .border-radius-01 {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+        .bcg-color-all {
+            background-color: #c8bbf1;
+            width: 100%;
+            height: 100%;
+        }
+
+
+
+        .ui.checkbox {
+            margin: 0;
+            padding: 0;
+        }
+
+        .ui.checkbox {
+            position: relative;
+            display: inline-block;
+            min-height: 17px;
+            font-size: 1rem;
+            line-height: 15px;
+            min-width: 17px;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            outline: none;
+            vertical-align: middle;
+        }
+
+
+        .ui.checkbox input {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            opacity: 0 !important;
+            outline: none;
+            z-index: -1;
+            color: inherit;
+            font: inherit;
+            margin: 0;
+        }
+        .right-content-13{
+            font-size: 13px;
+            text-align: right;
+            float: right;
+        }
+        .left-content-13{
+            font-size: 13px;
+            text-align: left;
+            width: 50%;
+            float: left;
+        }
+    </style>
+
+
+
+
+</head>
+<body>
+   <div class="bcg-color-all">
+        <div class="login-left" >
+            <img src="{% static 'images/001_two_girls.jpg'%}" class="border-radius-01">
+        </div>
+
+        <div class="login-right" >
+
+            <div class="account-body ">
+              <div class="account-body-tabs">
+                  <div class="auth-form-header p-0" >
+                    <h3>Sign in to Armand</h3>
+                  </div>
+              </div>
+
+              <div class="account-form-raw">
+                <label class="account-form-label">UserName：</label>
+                <div class="account-form-field account-form-field-phone ">
+                  <span class="icon clear-input hide"></span>
+                  <input type="text" name="name" maxlength="13" class="account-form-input" placeholder="UserName" tabindex="1">
+                </div>
+              </div>
+
+
+              <div class="account-form-raw">
+                <label class="account-form-label">PassWord：</label>
+                <div class="account-form-field account-form-codes">
+                  <input id="code" type="text" name="code" maxlength="6" class="account-form-input" placeholder="PassWord" tabindex="2" autocomplete="off">
+                </div>
+              </div>
+
+            <div class="account-body-tabs ">
+                    <div class="left-content-13">
+                        <input name="user[remember_me]" type="hidden" value="0">
+                        <input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" tabindex="0" class="hidden">
+                        <label>Remember me</label>
+                    </div>
+                <div class="right-content-13">
+                    <a class="session__toggle-button" data-control="phone" href="" style="text-decoration:none;" >Forgot password?</a>
+                </div>
+            </div>
+
+
+              <div class="account-form-field-submit btn ">
+                <a href="javascript:;" class="btn " style="color: white;text-decoration:none" align="center">Sign in</a>
+              </div>
+        </div>
+
+
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
