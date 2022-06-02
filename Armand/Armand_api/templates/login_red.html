@@ -14,11 +14,7 @@
 		<form action="#" id="form_signUp" method="">
 			<h1>Create Account</h1>
 			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
-			<span>or use your email for registration</span>
 			<input type="text" name="username_sign_up" placeholder="Name" />
 			<input type="email" name="email_sign_up" placeholder="Email" />
 			<input type="password" name="password_sign_up" placeholder="Password" />
@@ -33,10 +29,10 @@
 				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
 				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
 			</div>
-			<span>or use your account</span>
+			<h5 style="text-align: center;color: green"> {{ message_sign_in }}</h5>
 			<input name="username_sign_in" type="text" placeholder="username" />
 			<input name="password_sign_in" type="password" placeholder="Password" />
-			<a href="#" onclick="forgot_pwd()" id="forgot_pwd" action="" method="" >Forgot your password?</a>
+			<a href="/forgot_pwd/" target="_self">Forgot your password?</a>
 			<button onclick="signInFunc()" type="submit">Sign In</button> <!--logon-->
 		</form>
 	</div>
@@ -84,11 +80,6 @@
         document.getElementById("form_signUp").submit();
     }
 
-    function forgot_pwd() {
-        document.getElementById("forgot_pwd").action = '/forgot_pwd/';
-        document.getElementById("forgot_pwd").method = 'post';
-        document.getElementById("forgot_pwd").submit();
-    }
 </script>
 </body>
 </html>

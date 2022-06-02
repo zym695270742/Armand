@@ -65,7 +65,7 @@ def register_action(request):
 def v_login_red(request, message=''):
     res ={}
     res['notices'] = list(DB_notify.objects.all().values('content'))[::-1][0:2]
-    res['message'] = message
+    res['message_sign_in'] = message
     print(res)
     return render(request, 'login_red.html', res)
 
@@ -107,15 +107,13 @@ def sign_up_action(request):
     except: # 注册失败，用户名已存在
         return v_login_red(request, 'username exists')
 
-def forgot_pwd(request):
-    time.sleep(1)
-    return HttpResponseRedirect('/v_login_red/')
+
 
 # 忘记密码
 def forgot_pwd(request, message=''):
     res ={}
     res['notices'] = list(DB_notify.objects.all().values('content'))[::-1][0:2]
-    res['message'] = message
+    res['message_password_reset'] = message
     print(res)
     return render(request, 'pwd_reset.html', res)
 
@@ -125,20 +123,17 @@ def password_reset(request):
     new_pwd_cf = request.POST.get('new_password_confirm', None)
 
     # 如果用户不存在，则使跳转首页，创建用户
-    user = auth.authenticate(username=username)
-    if user is None:
-        return HttpResponseRedirect('/login_red/', 'user does not exists, please create new user' )
-
-    if username or new_pwd or new_pwd_cf is None:
-        return HttpResponseRedirect('/forgot_pwd/', "username or password can't be null" )
+    isExisting = User.objects.filter(username=username).exists()
+    if not isExisting:
+        return forgot_pwd(request, 'user does not exists, please create new user' )
 
     if new_pwd != new_pwd_cf:
-        return HttpResponseRedirect('/password_reset/', "password not same")
+        return forgot_pwd(request, "password not same")
 
     # 去DB修改密码
     try:
         pwd = User.objects.filter(username=username).update(password=make_password(new_pwd))
         print(pwd)
-        return HttpResponseRedirect('/login_red/', 'password reset success, please sign in')
+        return v_login_red(request,  'password reset success, please sign in')
     except:
-        return HttpResponseRedirect('/forgot_pwd/', "Internal error")
+        return forgot_pwd(request,  "Internal error")

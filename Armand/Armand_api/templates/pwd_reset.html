@@ -9,45 +9,86 @@
 <body>
 <!-- partial:index.partial.html -->
 <h1>Armand</h1>
-<div class="container" id="container">
+{% if message_password_reset %}
+    <div class="container right-panel-active" id="container">
 	<div class="form-container sign-up-container">
-		<form action="#" id="form_pwdReset" method="">
+		<form action="/" id="form_pwdReset" method="">
 			<h1>Password Reset</h1>
 			<div class="social-container">
+			</div>
+            <h5 style="text-align: center;color: red"> {{ message_password_reset }}</h5>
+			<input type="text" name="username" placeholder="Name" />
+			<input type="password" name="new_password" placeholder="Password" />
+			<input type="password" name="new_password_confirm" placeholder="Password" />
+			<button onclick="passwordReset(); return false;">Reset</button> <!--register-->
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form action="#" id="form_signIn" method="" >
+{#			<h1>Sign in</h1>#}
+{#			<div class="social-container">#}
 {#				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>#}
 {#				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>#}
 {#				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>#}
+{#			</div>#}
+{#			<h5 style="text-align: center;color: green"> {{ message_sign_in }}</h5>#}
+{#			<input name="username_sign_in" type="text" placeholder="username" />#}
+{#			<input name="password_sign_in" type="password" placeholder="Password" />#}
+{#			<a href="#" onclick="forgot_pwd()" id="forgot_pwd" action="" method="" >Forgot your password?</a>#}
+			<button onclick="signInFunc()" type="submit">Sign In</button> <!--logon-->
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn" onclick="signInFunc()">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your username and new password to reset your password</p>
+				<button class="ghost" id="signUp">Password Reset</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% else %}
+    <div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form action="/" id="form_pwdReset" method="">
+			<h1>Password Reset</h1>
+			<div class="social-container">
 			</div>
 			<span>or use your email to reset</span>
 			<input type="text" name="username" placeholder="Name" />
 			<input type="password" name="new_password" placeholder="Password" />
 			<input type="password" name="new_password_confirm" placeholder="Password" />
-			<button onclick="passwordReset()">Reset</button> <!--register-->
+			<button onclick="passwordReset(); return false;">Reset</button> <!--register-->
 		</form>
 	</div>
 	<div class="form-container sign-in-container">
 		<form action="#" id="form_signIn" method="" >
-			<h1>Sign in</h1>
-			<div class="social-container">
-				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-			</div>
-			<span>or use your account</span>
-			<input name="username_sign_in" type="text" placeholder="username" />
-			<input name="password_sign_in" type="password" placeholder="Password" />
-			<a href="#" onclick="forgot_pwd()" id="forgot_pwd" action="" method="" >Forgot your password?</a>
+{#			<h1>Sign in</h1>#}
+{#			<div class="social-container">#}
+{#				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>#}
+{#				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>#}
+{#				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>#}
+{#			</div>#}
+{#			<span>or use your account</span>#}
+{#			<input name="username_sign_in" type="text" placeholder="username" />#}
+{#			<input name="password_sign_in" type="password" placeholder="Password" />#}
+{#			<a href="#" onclick="forgot_pwd()" id="forgot_pwd" action="" method="" >Forgot your password?</a>#}
 			<button onclick="signInFunc()" type="submit">Sign In</button> <!--logon-->
 		</form>
 	</div>
 	<div class="overlay-container">
-                        <h5 style="text-align: center;color: green"> {{ message }}</h5>
 		<div class="overlay">
 			<div class="overlay-panel overlay-left">
 				<h1>Welcome Back!</h1>
 				<p>To keep connected with us please login with your personal info</p>
                 <h5 style="text-align: center;color: green"> {{ message }}</h5>
-				<button class="ghost" id="signIn">Sign In</button>
+				<button class="ghost" id="signIn" onclick="signInFunc()">Sign In</button>
 			</div>
 			<div class="overlay-panel overlay-right">
 				<h1>Hello, Friend!</h1>
@@ -58,6 +99,7 @@
 		</div>
 	</div>
 </div>
+{% endif %}
 
 <footer>
 	<p>
@@ -81,9 +123,9 @@
     }
 
     function passwordReset() {
-        document.getElementById("forgot_pwd").action = '/password_reset/';
-        document.getElementById("forgot_pwd").method = 'post';
-        document.getElementById("forgot_pwd").submit();
+        document.getElementById("form_pwdReset").action = '/password_reset/';
+        document.getElementById("form_pwdReset").method = 'post';
+        document.getElementById("form_pwdReset").submit();
     }
 </script>
 </body>
