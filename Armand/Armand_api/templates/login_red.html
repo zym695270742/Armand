@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Armand</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'><link rel="stylesheet" href="/static/sign_in_up_form/dist/style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h1>Armand</h1>
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form action="#" id="form_signUp" method="">
+			<h1>Create Account</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your email for registration</span>
+			<input type="text" name="username_sign_up" placeholder="Name" />
+			<input type="email" name="email_sign_up" placeholder="Email" />
+			<input type="password" name="password_sign_up" placeholder="Password" />
+			<button onclick="signUpFunc()">Sign Up</button> <!--register-->
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form action="#" id="form_signIn" method="" >
+			<h1>Sign in</h1>
+			<div class="social-container">
+				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+			</div>
+			<span>or use your account</span>
+			<input name="username_sign_in" type="text" placeholder="username" />
+			<input name="password_sign_in" type="password" placeholder="Password" />
+			<a href="#" onclick="forgot_pwd()" id="forgot_pwd" action="" method="" >Forgot your password?</a>
+			<button onclick="signInFunc()" type="submit">Sign In</button> <!--logon-->
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<footer>
+	<p>
+		Created with <i class="fa fa-heart"></i> by
+		<a target="_blank" href="https://carol-m.com">Carolmhuang</a>
+		- Read how I created this and how you can join the challenge
+		<a target="_blank" href="https://www.carol-m.com/blog/2019/03/Armand/">here</a>.
+	</p>
+</footer>
+<!-- partial -->
+  <script  src="/static/sign_in_up_form/dist/script.js"></script>
+
+
+<!-- My scripts -->
+<script>
+    function signInFunc() {
+        // 给form表单的属性赋值
+        document.getElementById("form_signIn").action = '/sign_in_action/';
+        document.getElementById("form_signIn").method = 'post';
+        document.getElementById("form_signIn").submit();
+    }
+
+    function signUpFunc() {
+        // 给form表单的属性赋值
+        document.getElementById("form_signUp").action = '/sign_up_action/';
+        document.getElementById("form_signUp").method = 'get';
+        document.getElementById("form_signUp").submit();
+    }
+
+    function forgot_pwd() {
+        document.getElementById("forgot_pwd").action = '/forgot_pwd/';
+        document.getElementById("forgot_pwd").method = 'post';
+        document.getElementById("forgot_pwd").submit();
+    }
+</script>
+</body>
+</html>

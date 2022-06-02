@@ -21,7 +21,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('help/', v_help),
     path('login_purple/', v_login_purple),
+
     path('login/', login),
     path('login_action/', login_action),
     path('register_action/', register_action),
+
+    path('login_red/', v_login_red),
+    path('sign_in_action/', sign_in_action),
+    path('sign_up_action/', sign_up_action),
+
+    path('forgot_pwd/', forgot_pwd),
+    path('password_reset/', password_reset),
 ]
