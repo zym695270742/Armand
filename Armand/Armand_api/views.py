@@ -1,9 +1,10 @@
+import json
 import time
 
 from django.shortcuts import render
 from Armand_api.models import *
 from django.contrib import auth
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 
@@ -137,3 +138,9 @@ def password_reset(request):
         return v_login_red(request,  'password reset success, please sign in')
     except:
         return forgot_pwd(request,  "Internal error")
+
+# 获取统计信息
+def get_tj_datas(request):
+    tj_datas = {}
+    tj_datas['notices'] =list(DB_notify.objects.all().values('content'))[::-1]
+    return HttpResponse(json.dumps(tj_datas), content_type='application/json')

@@ -34,4 +34,5 @@ urlpatterns = [
     path('forgot_pwd/', forgot_pwd),
     path('password_reset/', password_reset),
     path('index/', TemplateView.as_view(template_name='index.html')),
+    path('get_tj_datas/', get_tj_datas),
 ]
