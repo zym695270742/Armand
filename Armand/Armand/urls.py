@@ -16,13 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Armand_api.views import *
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('help/', v_help),
     path('login_purple/', v_login_purple),
 
-    path('login/', login),
+    path('', login),
     path('login_action/', login_action),
     path('register_action/', register_action),
 
@@ -32,4 +33,5 @@ urlpatterns = [
 
     path('forgot_pwd/', forgot_pwd),
     path('password_reset/', password_reset),
+    path('index/', TemplateView.as_view(template_name='index.html')),
 ]
