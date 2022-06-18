@@ -39,4 +39,6 @@ urlpatterns = [
     path('index/', index),  # 经过后台views.py index函数，渲染首页
     path('get_tj_datas/', get_tj_datas),
     path('get_real_time_datas/', get_real_time_datas),
+    path('proj_list/', proj_list),  # 获取项目列表
+    path('add_proj/', add_proj),  # 新增项目
 ]

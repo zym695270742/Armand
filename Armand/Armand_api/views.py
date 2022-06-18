@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required  # 登录态验证装饰器
 from django.shortcuts import get_object_or_404
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your views here.
 def v_help(request):
@@ -184,6 +185,7 @@ def get_tj_datas(request):
     }
     return HttpResponse(json.dumps(tj_datas), content_type='application/json')
 
+# 获取实时数据
 def get_real_time_datas(request):
     real_time_datas={
         "ApiShop_count": 10,
@@ -192,3 +194,31 @@ def get_real_time_datas(request):
         "Import_count": 34
     }
     return HttpResponse(json.dumps(real_time_datas),content_type='application/json')
+
+# 获取项目列表
+def proj_list(request):
+    proj_list_data = list(DB_proj_list.objects.all().values())[::-1]
+
+    # 增加创建者姓名，通过创建者id获取创建者姓名
+    for i in proj_list_data:
+        try:
+            creator_name = get_object_or_404(User, pk=i['creator']).username
+        except:
+            creator_name = '无名'
+        i['creator_name'] = creator_name
+
+        try:
+            updator_name = get_object_or_404(User, pk=i['updator']).username
+        except:
+            updator_name = '无名'
+        i['updator_name'] = updator_name
+
+    # DjangoJSONEncoder将datetime序列化为json
+    return HttpResponse(json.dumps(proj_list_data, cls=DjangoJSONEncoder), content_type='application/json')
+
+# 新增项目
+def add_proj(request):
+    # 防止用户由于cookie失效导致获取不到用户id
+    creator_id = request.user.id if request.user.id else 0
+    DB_proj_list.objects.create(creator=creator_id)
+    return proj_list(request)
