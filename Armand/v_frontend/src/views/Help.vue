@@ -1,5 +1,5 @@
 <template style="height: 100%;">
-  <div class="help" style="height: 100%; ">
+  <div style="height: 100%; ">
 <!--    <img alt="Vue logo" src="../assets/logo.png">-->
 <!--    <HelloWorld msg="Welcome to Your Vue.js App"/>-->
     <div style="height: 100%;">
@@ -26,30 +26,15 @@
                 <!--    second line cards            -->
                 <el-card class="box-card" style="width:-webkit-calc(70%  - 24px) ;float:left; margin-left: 10px;">
                   <div slot="header" class="clearfix">
-                    <span>个人贡献</span>
-                    <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+                    <span>card2</span>
+                    <el-button style="float: right; padding: 3px 0" type="text">xxxx</el-button>
                   </div>
-                  <table class="table">
-                    <thead>
-                      <th><el-progress type="circle" :percentage="tj_datas.contributions.project"></el-progress></th>
-                      <th><el-progress type="circle" :percentage="tj_datas.contributions.case"></el-progress></th>
-                      <th><el-progress type="circle" :percentage="tj_datas.contributions.api" color="rgb(19, 206, 102)"></el-progress></th>
-                      <th><el-progress type="circle" :percentage="tj_datas.contributions.monitor" color="#f56c6c"></el-progress></th>
-                    </thead>
-                    <tbody>
-                      <td><span>个人项目占比</span></td>
-                      <td><span>个人用例占比</span></td>
-                      <td><span>个人接口占比</span></td>
-                      <td><span>个人监控贡献占比</span></td>
-                    </tbody>
-                  </table>
 
                 </el-card>
 
 
               </el-main>
               <el-footer style="padding: 80px;text-align: left;padding: 0;height: 15%;">
-
               </el-footer>
             </el-container>
           </el-container>
@@ -61,17 +46,12 @@
 <script>
 // @ is an alias to /src
 import Menu from '../components/Menu.vue'
-import axios from 'axios'
 export default {
-  name: 'help',
+  name: 'Help',
   data() {
     return {
       message: 'default data',
     };
-  },
-
-  methods:{
-
   },
   components:{
     Menu,

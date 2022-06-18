@@ -11,7 +11,7 @@
           <i class="el-icon-menu"></i>
           <span>功能区</span>
         </template>
-        <el-menu-item index="1-1-1">项目管理</el-menu-item>
+        <el-menu-item index="/project_list/">项目管理</el-menu-item>
         <el-menu-item index="1-1-2">环境管理</el-menu-item>
         <el-menu-item index="1-1-3">官方接口库</el-menu-item>
         <el-menu-item index="1-1-4">线上监控</el-menu-item>
@@ -32,7 +32,7 @@
         <el-menu-item index="2-1-1">个人资料</el-menu-item>
         <el-menu-item index="2-2-1">个人贡献</el-menu-item>
         <el-menu-item index="2-3-1">发送消息</el-menu-item>
-        <el-menu-item index="help">帮助</el-menu-item>
+        <el-menu-item index="/help/">帮助</el-menu-item>
 <!--        <a href="http://localhost:8000/help/"><el-menu-item >帮助</el-menu-item></a>-->
         <a href="http://localhost:8000/logout/"><el-menu-item index="2-4-1">退出</el-menu-item></a>
       </el-submenu>
