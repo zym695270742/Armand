@@ -2,6 +2,7 @@
   <div id="app" style="height: 100%;">
     <div id="nav" style="padding: 0;">
       <router-link to="/"></router-link>
+<!--      <router-link to="/help"></router-link>-->
 <!--      <router-link to="/">Home</router-link> |-->
 <!--      <router-link to="/about">About</router-link>-->
     </div>

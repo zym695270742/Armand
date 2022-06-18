@@ -4,3 +4,4 @@ from django.contrib import admin
 from Armand_api.models import *
 
 admin.site.register(DB_notify)
+admin.site.register(DB_news)

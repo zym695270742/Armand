@@ -26,6 +26,8 @@ urlpatterns = [
     path('', login),
     path('login_action/', login_action),
     path('register_action/', register_action),
+    path('accounts/login/', login),
+    path('logout/', logout),
 
     path('login_red/', v_login_red),
     path('sign_in_action/', sign_in_action),
@@ -33,5 +35,8 @@ urlpatterns = [
 
     path('forgot_pwd/', forgot_pwd),
     path('password_reset/', password_reset),
-    path('index/', TemplateView.as_view(template_name='index.html')),
+    # path('index/', TemplateView.as_view(template_name='index.html')), # 不经过后台views.py
+    path('index/', index),  # 经过后台views.py index函数，渲染首页
+    path('get_tj_datas/', get_tj_datas),
+    path('get_real_time_datas/', get_real_time_datas),
 ]

@@ -1,11 +1,14 @@
+import json
 import time
 
 from django.shortcuts import render
 from Armand_api.models import *
 from django.contrib import auth
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.decorators import login_required  # 登录态验证装饰器
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def v_help(request):
@@ -14,52 +17,6 @@ def v_help(request):
 # purple logon page
 def v_login_purple(request):
     return render(request, 'login_purple.html')
-
-def login(request, message=''):
-    res ={}
-    res['notices'] = list(DB_notify.objects.all().values('content'))[::-1][0:2]
-    res['message'] = message
-    print(res)
-    return render(request, 'login.html', res)
-
-# 登录功能
-def login_action(request):
-    # 让用户体验到平台的安全，是花了时间比对的，心理暗示。类似取款机的取钱声音，是录音，让用户觉得安全。
-    time.sleep(1)
-    # 获取用户名密码
-    username = request.POST.get('username', None)
-    password = request.POST.get('password', None)
-    print(username,":",password)
-    # 去数据库进行比对
-    user =  auth.authenticate(username=username, password=password)
-    if user is None: # 用户名/密码错误
-        return login(request, 'username or password error')
-    else: # 验证成功
-        # 登录
-        auth.login(request, user)
-        request.session['user'] = username
-        # 跳转至首页
-        return HttpResponseRedirect('/index/')
-
-# 注册功能
-def register_action(request):
-    time.sleep(1)
-    # 获取用户名密码
-    username = request.GET['username']
-    password = request.GET['password']
-    print(username,":",password)
-    #去数据库注册
-    try: # 注册成功
-        user = User.objects.create_user(username=username,password=password)
-        user.save()
-        # 登录
-        auth.login(request, user)
-        request.session['user'] = username
-        # 跳转至首页
-        return HttpResponseRedirect('/index/')
-    except: # 注册失败，用户名已存在
-        return login(request, 'username exists')
-
 
 # red logon page
 def v_login_red(request, message=''):
@@ -109,6 +66,63 @@ def sign_up_action(request):
 
 
 
+def login(request, message=''):
+    res ={}
+    res['notices'] = list(DB_notify.objects.all().values('content'))[::-1][0:2]
+    res['message'] = message
+    print(res)
+    return render(request, 'login.html', res)
+
+# 登录功能
+def login_action(request):
+    # 让用户体验到平台的安全，是花了时间比对的，心理暗示。类似取款机的取钱声音，是录音，让用户觉得安全。
+    time.sleep(0.3)
+    # 获取用户名密码
+    username = request.POST.get('username', None)
+    password = request.POST.get('password', None)
+    print(username,":",password)
+    # 去数据库进行比对
+    user = auth.authenticate(username=username, password=password)
+    if user is None: # 用户名/密码错误
+        return login(request, 'username or password error')
+    else: # 验证成功
+        # 登录
+        auth.login(request, user)
+        request.session['user'] = username
+        # 跳转至首页
+        return HttpResponseRedirect('/index/')
+
+# 注册功能
+def register_action(request):
+    time.sleep(1)
+    # 获取用户名密码
+    username = request.GET['username']
+    password = request.GET['password']
+    print(username,":",password)
+    #去数据库注册
+    try: # 注册成功
+        user = User.objects.create_user(username=username,password=password)
+        user.save()
+        # 登录
+        auth.login(request, user)
+        request.session['user'] = username
+        # 跳转至首页
+        return HttpResponseRedirect('/index/')
+    except: # 注册失败，用户名已存在
+        return login(request, 'username exists')
+
+# 退出功能
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect("/")  # 重定向到登录页面
+
+# 进入vue的首页
+@login_required
+def index(request):
+    return render(request, 'index.html')
+
+
+
 # 忘记密码
 def forgot_pwd(request, message=''):
     res ={}
@@ -137,3 +151,44 @@ def password_reset(request):
         return v_login_red(request,  'password reset success, please sign in')
     except:
         return forgot_pwd(request,  "Internal error")
+
+# 获取统计信息
+def get_tj_datas(request):
+    # 获取用户ID
+    userID = request.user.id  # 具体实现（获取请求头里的cookie携带的sessionID,反解析获取到用户的id、name等信息）
+    tj_datas = {}
+    tj_datas['notices'] =list(DB_notify.objects.all().values('content'))[::-1]
+    tj_datas['news']=list(DB_news.objects.filter(to_user_id=userID).values())[::-1]
+    for i in tj_datas['news']:
+        from_user_name = get_object_or_404(User, pk=i['from_user_id']).username
+        i['from_user_name']= from_user_name
+        i['content'] = i['content'][:10] + '...' if len(i['content']) > 10 else i['content'] # 三元运算符
+    print(tj_datas['news'])
+    tj_datas['overview'] = {
+        "project_count": 80,
+        "api_count": 20,
+        "case_count": 220,
+        "env_count": 40,
+        "user_count": 20
+    }
+    tj_datas['monitors'] = {
+        "case_pass": 98,
+        "api_pass": 99,
+        "case_fail": 10,
+    }
+    tj_datas['contributions'] = {
+        "project":10,
+        "case": 1110,
+        "api": 10,
+        "monitor":90
+    }
+    return HttpResponse(json.dumps(tj_datas), content_type='application/json')
+
+def get_real_time_datas(request):
+    real_time_datas={
+        "ApiShop_count": 10,
+        "UnReadNews_count": 110,
+        "RunCase_count": 68,
+        "Import_count": 34
+    }
+    return HttpResponse(json.dumps(real_time_datas),content_type='application/json')
