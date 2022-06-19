@@ -10,7 +10,7 @@
               placeholder="请输入项目名称关键字，可模糊匹配"
               prefix-icon="el-icon-search"
               v-model="keys"
-              @change="search_project()">
+              @change="search_project">
           </el-input>
       </el-header>
       <el-main>
@@ -92,7 +92,12 @@ export default {
   },
   methods:{
     search_project(){
-      alert('开始搜索~')
+      axios.get('http://localhost:8000/proj_list/',{
+        params:{
+          keys: this.keys
+        }}).then(res=>{
+          this.proj_list_data = res.data
+      })
     },
     add_proj(){
       axios.get('http://localhost:8000/add_proj/').then(res=>{
@@ -100,8 +105,12 @@ export default {
       })
     },
     delete_proj(proj_id){
-      axios.post('http://localhost:8000/delete_proj?proj_id='+proj_id).then(res=>{
-
+      axios.get('http://localhost:8000/delete_proj',{
+        params:{
+          proj_id: proj_id
+        }
+      }).then(res=>{
+        this.proj_list_data = res.data
       })
     }
   },

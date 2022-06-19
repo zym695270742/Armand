@@ -197,7 +197,12 @@ def get_real_time_datas(request):
 
 # 获取项目列表
 def proj_list(request):
-    proj_list_data = list(DB_proj_list.objects.all().values())[::-1]
+    # 需兼容未输入关键字 和输入关键字查询两种情况
+    keys = request.GET.get('keys', None)  # 注意这里与必定存在参数的 获取方法不同, 对比request.GET['proj_id']
+    if keys:
+        proj_list_data = list((DB_proj_list.objects.filter(proj_name__contains=keys)|DB_proj_list.objects.filter(des__contains=keys)).values())[::-1]
+    else:
+        proj_list_data = list(DB_proj_list.objects.all().values())[::-1]
 
     # 增加创建者姓名，通过创建者id获取创建者姓名
     for i in proj_list_data:
@@ -221,4 +226,10 @@ def add_proj(request):
     # 防止用户由于cookie失效导致获取不到用户id
     creator_id = request.user.id if request.user.id else 0
     DB_proj_list.objects.create(creator=creator_id)
+    return proj_list(request)
+
+# 删除项目
+def delete_proj(request):
+    proj_id = request.GET['proj_id']
+    DB_proj_list.objects.filter(id=proj_id).delete()
     return proj_list(request)
