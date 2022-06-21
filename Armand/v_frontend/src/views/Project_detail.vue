@@ -2,18 +2,19 @@
 <div style="height: 100%;">
   <el-container style="height: 100%;">
     <el-aside width="200px">
-      <Menu></Menu>
+          <Menu></Menu>
     </el-aside>
-    <el-container>
-      <el-header style="line-height: 60px;">
-          <span> Porject ID: {{$route.query.proj_id}}</span>
-      </el-header>
-      <el-main>
-
-        <h2>详情页</h2>
-
-      </el-main>
-    </el-container>
+    <el-main>
+          <span style="float:right;">项目ID: {{$route.query.proj_id}}</span>
+          <el-tabs v-model="tab_name">
+              <el-tab-pane label="项目配置" name="proj_detail_01">
+                    <Proj_config :proj_id="$route.query.proj_id"></Proj_config>
+              </el-tab-pane>
+              <el-tab-pane label="项目用例" name="proj_detail_02">
+                    <Proj_cases></Proj_cases>
+              </el-tab-pane>
+          </el-tabs>
+    </el-main>
   </el-container>
 </div>
 </template>
@@ -21,11 +22,13 @@
 <script>
 import Menu from '../components/Menu.vue'
 import axios from 'axios'
+import Proj_config from '../components/Proj_config.vue'
+import Proj_cases from '../components/Proj_cases.vue'
 export default {
   name: "project_detail",
   data(){
     return{
-
+      tab_name: "proj_detail_01",
     }
   },
   methods:{
@@ -33,6 +36,8 @@ export default {
   },
   components:{
     Menu,
+    Proj_config,
+    Proj_cases,
   },
   mounted:function(){
 
