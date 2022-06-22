@@ -9,7 +9,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required  # 登录态验证装饰器
 from django.shortcuts import get_object_or_404
-from django.core.serializers.json import DjangoJSONEncoder
+# from django.core.serializers.json import DjangoJSONEncoder
+from utils.dataFormat import CJsonEncoder
 
 # Create your views here.
 def v_help(request):
@@ -219,7 +220,7 @@ def proj_list(request):
         i['updator_name'] = updator_name
 
     # DjangoJSONEncoder将datetime序列化为json
-    return HttpResponse(json.dumps(proj_list_data, cls=DjangoJSONEncoder), content_type='application/json')
+    return HttpResponse(json.dumps(proj_list_data, cls=CJsonEncoder), content_type='application/json')
 
 # 新增项目
 def add_proj(request):
@@ -233,3 +234,18 @@ def delete_proj(request):
     proj_id = request.GET['proj_id']
     DB_proj_list.objects.filter(id=proj_id).delete()
     return proj_list(request)
+
+# 获取项目配置信息
+def get_proj_config(request):
+    proj_id = request.GET['proj_id']
+    proj_config = DB_proj_list.objects.filter(id=proj_id).values()[0]
+    print(proj_config)
+    print(type(proj_config))
+    return HttpResponse(json.dumps(str(proj_config,encoding='utf-8'), cls=CJsonEncoder), content_type='application/json') # 这里报错，需改
+
+# 更新项目配置信息
+def update_proj_config(request):
+    new_proj_config = request.body
+    print(new_proj_config)
+    # new_proj_config = DB_proj_list.objects.filter(id=proj_id)
+    return HttpResponse('', content_type='application/json')

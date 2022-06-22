@@ -43,4 +43,6 @@ urlpatterns = [
     path('add_proj/', add_proj),  # 新增项目
     path('delete_proj/', delete_proj),  # 删除项目
     # path('search_projs_by_key/', proj_list),  #
+    path('get_proj_config/', get_proj_config), # 获取项目配置信息
+    path('update_proj_config/', update_proj_config), # 更新项目配置信息
 ]

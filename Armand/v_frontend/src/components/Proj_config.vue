@@ -23,6 +23,12 @@
                     <el-input type="datetime" v-model="proj_details.update_time"></el-input>
                 </el-form-item>
               </el-form>
+
+              <el-from>
+                  <el-form-item>
+                      <el-button type="primary" @click="updateProjConfig">更新</el-button>
+                  </el-form-item>
+              </el-from>
           </el-form>
       </el-container>
   </div>
@@ -45,7 +51,16 @@ export default {
     }
   },
   methods:{
-
+    updateProjConfig(){
+      axios.post('http://localhost:8000/update_proj_config/', this.proj_details).then(
+          this.$message(
+              {
+                message: 'Update success!',
+                type: 'success'
+              }
+          )
+      )
+    },
   },
   mounted:function(){
     axios.get('http://localhost:8000/get_proj_config/',{
