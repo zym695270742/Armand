@@ -1,3 +1,4 @@
+import ast
 import json
 import time
 
@@ -11,6 +12,8 @@ from django.contrib.auth.decorators import login_required  # 登录态验证装�
 from django.shortcuts import get_object_or_404
 # from django.core.serializers.json import DjangoJSONEncoder
 from utils.dataFormat import CJsonEncoder
+from django.utils import timezone
+from ast import literal_eval
 
 # Create your views here.
 def v_help(request):
@@ -235,15 +238,38 @@ def delete_proj(request):
     DB_proj_list.objects.filter(id=proj_id).delete()
     return proj_list(request)
 
+
 # 获取项目配置信息
 def get_proj_config(request):
     proj_id = request.GET['proj_id']
     proj_config = DB_proj_list.objects.filter(id=proj_id).values()[0]
-    return HttpResponse(json.dumps(proj_config, cls=CJsonEncoder), content_type='application/json')
+
+    # 将列表格式的字符串安全转化为列表类型
+    proj_config['Permission'] = literal_eval(proj_config['Permission'])
+    return HttpResponse(json.dumps(proj_config, cls=CJsonEncoder), content_type='application/json')  # 前端需要json格式的字符串
+
 
 # 更新项目配置信息
 def update_proj_config(request):
-    new_proj_config = request.body
-    print(new_proj_config)
-    # new_proj_config = DB_proj_list.objects.filter(id=proj_id)
-    return HttpResponse('', content_type='application/json')
+    body  = request.body
+
+    # 将从web服务器接收到的json格式的bytes类型转换成str
+    str_new_proj_config = str(body, encoding='utf-8')
+
+    # 将json格式的字符串转换为字典
+    dict_new_proj_config = json.loads(str_new_proj_config)
+    print('dict-----',dict_new_proj_config)
+    print(type(dict_new_proj_config))
+    print(dict_new_proj_config["id"])
+
+    # 创建时间无需更新，去除该字段
+    if dict_new_proj_config['create_time']:
+        dict_new_proj_config.pop('create_time')
+
+    # 将当前时间转换成 带时区的utc时间，因为db需要接收的是active time(带时区的时间) 不是naive time(不带时区的时间)--- USE_TZ = True
+    dict_new_proj_config['update_time'] = timezone.now()
+
+    # 执行更新
+    new_proj_config = DB_proj_list.objects.filter(id=dict_new_proj_config['id']).update(**dict_new_proj_config)
+
+    return HttpResponse(json.dumps(new_proj_config), content_type='application/json')
