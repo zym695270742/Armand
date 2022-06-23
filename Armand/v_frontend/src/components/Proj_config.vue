@@ -1,7 +1,6 @@
 <template>
-  <div>
-      <el-container>
-          <el-form :model="proj_details" label-width="120px">
+    <div>
+          <el-form :model="proj_details" label-width="100px">
               <el-form-item label="项目名称">
                   <el-input v-model="proj_details.proj_name"></el-input>
               </el-form-item>
@@ -9,29 +8,28 @@
                   <el-input type="textarea" v-model="proj_details.des"></el-input>
               </el-form-item>
 
-              <el-form :model="proj_details" label-width="120px" :disabled="true">
-                <el-form-item label="项目创建者">
-                    <el-input v-model="proj_details.creator"></el-input>
-                </el-form-item>
-                <el-form-item label="项目创建时间">
-                    <el-input type="datetime" v-model="proj_details.create_time"></el-input>
-                </el-form-item>
-                <el-form-item label="项目更新者">
-                    <el-input v-model="proj_details.updator"></el-input>
-                </el-form-item>
-                <el-form-item label="项目更新时间">
-                    <el-input type="datetime" v-model="proj_details.update_time"></el-input>
-                </el-form-item>
-              </el-form>
+            <el-form :model="proj_details" label-width="100px" :disabled="true">
+              <el-form-item label="创建者">
+                  <el-input v-model="proj_details.creator"></el-input>
+              </el-form-item>
+              <el-form-item label="创建时间">
+                  <el-input type="datetime" v-model="proj_details.create_time"></el-input>
+              </el-form-item>
+              <el-form-item label="更新者">
+                  <el-input v-model="proj_details.updator"></el-input>
+              </el-form-item>
+              <el-form-item label="更新时间">
+                  <el-input type="datetime" v-model="proj_details.update_time"></el-input>
+              </el-form-item>
+            </el-form>
 
-              <el-from>
-                  <el-form-item>
-                      <el-button type="primary" @click="updateProjConfig">更新</el-button>
-                  </el-form-item>
-              </el-from>
+            <el-from>
+                <el-form-item>
+                    <el-button type="primary" @click="updateProjConfig">更新</el-button>
+                </el-form-item>
+            </el-from>
           </el-form>
-      </el-container>
-  </div>
+    </div>
 </template>
 
 <script>
