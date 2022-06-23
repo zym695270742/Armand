@@ -17,7 +17,7 @@ class CJsonEncoder(json.JSONEncoder):
     '''
     def default(self, obj):
         if isinstance(obj, datetime.datetime):
-            # obj = TimeFormat.dateTimeFromUTCToDefault(obj)
+            obj = TimeFormat.dateTimeFromUTCToDefault(obj)
             return obj.strftime('%Y-%m-%d %H:%M:%S')
         elif isinstance(obj, datetime.date):
             obj = TimeFormat.dateTimeFromUTCToDefault(obj)
