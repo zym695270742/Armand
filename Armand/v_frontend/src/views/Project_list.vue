@@ -105,7 +105,7 @@ export default {
       })
     },
     delete_proj(proj_id){
-      axios.get('http://localhost:8000/delete_proj',{
+      axios.get('http://localhost:8000/delete_proj/',{  // url最后必须加上’/‘，否则报跨域错误
         params:{
           proj_id: proj_id
         }
