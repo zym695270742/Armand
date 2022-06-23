@@ -1,15 +1,26 @@
 import datetime
-
-# from django.core.serializers import json
+from django.utils.timezone import get_default_timezone  # 获取settings中配置的timezone
 import json
 
-class CJsonEncoder(json.JSONEncoder):
 
+class TimeFormat():
+    @classmethod
+    def dateTimeFromUTCToDefault(self, awareTime):
+        # 将models里定义的DateTimeField字段的值转换为项目指定时区时间
+        default_zn_t = awareTime.astimezone(get_default_timezone())
+        return default_zn_t
+
+
+class CJsonEncoder(json.JSONEncoder):
+    '''
+        重写json.JsonEncoder将datetime序列化为json
+    '''
     def default(self, obj):
         if isinstance(obj, datetime.datetime):
-            res = obj.strftime('%Y-%M-%D %H:%M:%S')
+            # obj = TimeFormat.dateTimeFromUTCToDefault(obj)
+            return obj.strftime('%Y-%m-%d %H:%M:%S')
         elif isinstance(obj, datetime.date):
-            res = obj.strftime('%Y-%M-%D')
+            obj = TimeFormat.dateTimeFromUTCToDefault(obj)
+            return obj.strftime('%Y-%m-%d')
         else:
-            res = {'result_code':'999','result_message':'time data error,please check the value'}
-        return json.JSONEncoder.default(self, res)
+            return json.JSONEncoder.default(self, obj)
