@@ -6,16 +6,19 @@ import json
 class TimeFormat():
     @classmethod
     def dateTimeFromUTCToDefault(self, awareTime):
-        # 将models里定义的DateTimeField字段的值转换为项目指定时区时间
+        '''
+            将models里定义的DateTimeField字段的值转换为项目指定时区时间
+        '''
         default_zn_t = awareTime.astimezone(get_default_timezone())
         return default_zn_t
 
 
 class CJsonEncoder(json.JSONEncoder):
-    '''
-        重写json.JsonEncoder将datetime序列化为json
-    '''
+
     def default(self, obj):
+        '''
+            重写json.JsonEncoder将datetime序列化为json
+        '''
         if isinstance(obj, datetime.datetime):
             obj = TimeFormat.dateTimeFromUTCToDefault(obj)
             return obj.strftime('%Y-%m-%d %H:%M:%S')
