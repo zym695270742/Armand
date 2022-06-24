@@ -1,6 +1,6 @@
 <template>
     <el-menu
-      default-active="2"
+      :default-active="highlight_menu"
       class="el-menu-vertical-demo"
       router
       :default-openeds="['1','2']">
@@ -54,6 +54,11 @@
 <script>
 export default {
   name: 'Menu',
+  data(){
+    return{
+      highlight_menu: window.location.href.split('#')[1].split('?')[0],
+    }
+  },
   props: {
     msg: String
   }
