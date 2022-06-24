@@ -21,3 +21,12 @@ yarn-error.log*
 *.sw?
 
 **/*.pyc
+.project
+.pydevproject
+.idea/inspectionProfiles/
+.idea/*
+.idea/workspace.xml
+.idea/misc.xml
+.idea/BOSS.iml
+venv/*
+*.log
