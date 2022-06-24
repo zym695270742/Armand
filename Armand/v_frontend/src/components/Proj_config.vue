@@ -31,13 +31,13 @@
                   </el-checkbox-group>
               </el-form-item>
               <el-form-item label="登录变量">
-                <el-input type="textarea" v-model="proj_details.Logon_var"></el-input>
+                <el-input type="textarea" v-model="proj_details.Logon_var" :rows='3'></el-input>
               </el-form-item>
               <el-form-item label="公共变量">
-                  <el-input type="textarea" v-model="proj_details.Public_var"></el-input>
+                  <el-input type="textarea" v-model="proj_details.Public_var" :rows='3'></el-input>
               </el-form-item>
-              <el-form-item label="签名设置">
-                  <el-input type="textarea" v-model="proj_details.sign" ></el-input>
+              <el-form-item label="签名设置" >
+                  <el-input type="textarea" v-model="proj_details.sign" :rows='3'></el-input>
               </el-form-item>
 
               <el-form :model="proj_details" label-width="100px" :disabled="true">
